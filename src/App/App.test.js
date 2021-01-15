@@ -1,6 +1,7 @@
 import { render, screen, getNodeText, fireEvent } from '@testing-library/react';
 import App from './App';
 import testIds from './testIs';
+import React from "react";
 
 
 describe('<App />', () => {
@@ -15,7 +16,7 @@ describe('<App />', () => {
   })
 
   describe('Game', () => {
-    let p1input, p2input, button, p1name, p2name;
+    let p1input, p2input, button, p1name, p2name, playingField;
 
     beforeEach(() => {
       p1input = screen.queryByTestId(testIds.player1Input);
@@ -55,6 +56,18 @@ describe('<App />', () => {
       test('names should be presented', () => {
         expect(p1name).toBeInTheDocument()
         expect(p2name).toBeInTheDocument()
+      })
+
+
+      describe('playing field', () => {
+        beforeEach(() => {
+          playingField = screen.queryByTestId(testIds.playingField);
+        })
+
+        test('playing field must be presented', () => {
+          expect(playingField).toBeInTheDocument()
+        })
+
       })
     })
   })

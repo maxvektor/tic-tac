@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { Players } from '../Players/Players'
 import './App.css';
 import testIds from './testIs'
+import { PlayingField } from "../PlayingField/PlayingField";
 
 function App() {
   const [p1Name, setP1Name] = useState('');
@@ -27,6 +28,9 @@ function App() {
         setP2Name={onInput2Change}
         isGameStarted={isGameStarted}
       />
+        {
+            isGameStarted && <PlayingField/>
+        }
     </div >
   );
 }
