@@ -1,19 +1,23 @@
-import testIs from "../App/testIs";
+import {useState} from "react";
 import styles from './PlayingCell.module.css'
-import { useState } from 'react';
+import testIds from "../App/testIs";
+
+const {
+    playingCellId
+} = testIds;
 
 export const PlayingCell = () => {
-    const [ cellValue, setCellValue ] = useState('')
+    const [cellValue, setCellValue] = useState('')
 
-    const onCellClick = () => {
-        cellValue ? setCellValue('') : setCellValue('x')
+    const onClick = () => {
+        setCellValue('x')
     }
 
     return (
         <button
-            data-testid={testIs.playingCell}
-            onClick={ onCellClick }
+            data-testid={playingCellId}
             className={styles.box}
+            onClick={onClick}
         >
             {cellValue}
         </button>

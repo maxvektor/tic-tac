@@ -1,17 +1,25 @@
-import { render, screen, getNodeText, fireEvent } from '@testing-library/react';
+import { render, getNodeText, fireEvent } from '@testing-library/react';
 import App from './App';
 import testIds from './testIs';
-import React from "react";
+import { getElement } from '../helpers';
 
+const {
+  titleId,
+  player1Input,
+  player1Name,
+  player2Input,
+  player2Name,
+  startButton,
+  playingFieldId,
+} = testIds;
 
 describe('<App />', () => {
   beforeEach(() => {
     render(<App />);
-
   })
 
   test('Title', () => {
-    const title = screen.getByTestId(testIds.title);
+    const title = getElement(titleId);
     expect(getNodeText(title)).toBe('Tik-tak')
   })
 
@@ -19,11 +27,12 @@ describe('<App />', () => {
     let p1input, p2input, button, p1name, p2name, playingField;
 
     beforeEach(() => {
-      p1input = screen.queryByTestId(testIds.player1Input);
-      p2input = screen.queryByTestId(testIds.player2Input);
-      button = screen.queryByTestId(testIds.startButton);
-      p1name = screen.queryByTestId(testIds.player1Name);
-      p2name = screen.queryByTestId(testIds.player2Name);
+      p1input = getElement(player1Input);
+      p2input = getElement(player2Input);
+      button = getElement(startButton);
+      p1name = getElement(player1Name);
+      p2name = getElement(player2Name);
+      playingField = getElement(playingFieldId);
     })
 
     describe('before start', () => {
@@ -36,6 +45,11 @@ describe('<App />', () => {
         expect(p1name).not.toBeInTheDocument()
         expect(p2name).not.toBeInTheDocument()
       })
+
+      test('Playing field should NOT be presented', () => {
+        expect(playingField).not.toBeInTheDocument()
+      })
+
     })
 
     describe('after start', () => {
@@ -44,8 +58,9 @@ describe('<App />', () => {
         fireEvent.change(p2input, { target: { value: 'player 2' } })
         fireEvent.click(button);
         // requery names after button click
-        p1name = screen.queryByTestId(testIds.player1Name);
-        p2name = screen.queryByTestId(testIds.player2Name);
+        p1name = getElement(player1Name);
+        p2name = getElement(player2Name);
+        playingField = getElement(playingFieldId);
       })
 
       test('inputs should NOT be presented', () => {
@@ -58,17 +73,11 @@ describe('<App />', () => {
         expect(p2name).toBeInTheDocument()
       })
 
-
-      describe('playing field', () => {
-        beforeEach(() => {
-          playingField = screen.queryByTestId(testIds.playingField);
-        })
-
-        test('playing field must be presented', () => {
-          expect(playingField).toBeInTheDocument()
-        })
-
+      test('Playing field should be presented', () => {
+        expect(playingField).toBeInTheDocument()
       })
+
     })
   })
 })
+

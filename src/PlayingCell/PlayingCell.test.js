@@ -1,41 +1,34 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import testIds from '../App/testIs';
 import { PlayingCell } from './PlayingCell';
+import {getElement} from "../helpers";
 
+const {
+    playingCellId
+} = testIds;
 
-describe('<PlayingCell />', () => {
-  let cell;
-  beforeEach(() => {
-    render(<PlayingCell />)
-  })
-
-  test('Playing cell must be empty', () => {
-    cell = screen.queryByTestId(testIds.playingCell);
-    expect(cell).toBeEmptyDOMElement()
-  })
-
-  describe('after one click', () => {
+describe('<PlayingCell/>', () => {
+    let cell;
     beforeEach(() => {
-      cell = screen.queryByTestId(testIds.playingCell);
-      fireEvent.click(cell)
+        render(<PlayingCell/>)
+        cell = getElement(playingCellId);
+    })
+    test('PlayingCell must be presented', () => {
+        expect(cell).toBeInTheDocument()
     })
 
-    test('Cell value is must be x', () => {
-      expect(cell).toHaveTextContent('x')
-    })
-  })
-
-  describe('after two clicks', () => {
-    beforeEach(() => {
-      cell = screen.queryByTestId(testIds.playingCell);
-      fireEvent.click(cell)
-      fireEvent.click(cell)
+    test('PlayingCell must be empty by default', () => {
+        expect(cell).toBeEmptyDOMElement()
     })
 
-    test('Playing cell must be empty', () => {
-      expect(cell).toBeEmptyDOMElement()
+    describe('after click', () => {
+        beforeEach(() => {
+            cell = getElement(playingCellId);
+            fireEvent.click(cell)
+        })
+
+        test('PlayingCell value must be x', () => {
+            expect(cell).toHaveTextContent('x')
+        })
     })
-  })
 })
-
-
