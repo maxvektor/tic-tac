@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+.eslintcache
 .pnp.js
 
 # testing
@@ -10,9 +11,9 @@
 
 # production
 /build
+.eslintcache
 
 # misc
-.DS_Store
 .env.local
 .env.development.local
 .env.test.local

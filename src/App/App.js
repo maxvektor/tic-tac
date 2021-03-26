@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
-import { Players } from '../Players/Players'
 import './App.css';
-import testIds from './testIs'
+import testIds from './testIs';
+import { Players } from '../Players/Players';
+import { PlayingField }  from "../PlayingField/PlayingField";
 
 function App() {
   const [p1Name, setP1Name] = useState('');
@@ -18,15 +19,16 @@ function App() {
 
   return (
     <div className="App">
-      <h1 data-testid={testIds.title}>Tik-tak</h1>
+      <h1 data-testid={testIds.titleId}>Tik-tak</h1>
       <Players
         p1Name={p1Name}
         p2Name={p2Name}
-        setGameStarted={setGameStarted}
         setP1Name={onInput1Change}
         setP2Name={onInput2Change}
         isGameStarted={isGameStarted}
+        setGameStarted={setGameStarted}
       />
+      <PlayingField isGameStarted={isGameStarted}/>
     </div >
   );
 }
