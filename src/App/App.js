@@ -17,6 +17,18 @@ function App() {
     setP2Name(e.target.value)
   }, [])
 
+    const gameData = {
+        p1Name,
+        p2Name,
+        isGameStarted
+    }
+    // question to Mikhail
+    const showWinner = (name) => {
+      return (
+          <div>Победил {name}</div>
+      )
+    }
+
   return (
     <div className="App">
       <h1 data-testid={testIds.titleId}>Tik-tak</h1>
@@ -28,7 +40,7 @@ function App() {
         isGameStarted={isGameStarted}
         setGameStarted={setGameStarted}
       />
-      <PlayingField isGameStarted={isGameStarted}/>
+      <PlayingField {...gameData}/>
     </div >
   );
 }

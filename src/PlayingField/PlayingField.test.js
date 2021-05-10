@@ -16,4 +16,5 @@ describe('<PlayingField/>', () => {
         const items = await getAllElements(playingCellId);
         expect(items).toHaveLength(9)
     })
+
 })

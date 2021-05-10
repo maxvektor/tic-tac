@@ -10,31 +10,30 @@ export const Players = ({
 }) => {
     return <>
         {
-            !isGameStarted
-            && <input
-                data-testid={testIds.player1Input}
-                onChange={setP1Name} />
+            isGameStarted ? (
+                <h2 data-testid={testIds.player1Name} >
+                    {p1Name}
+                </h2> ) : (
+                <input
+                    data-testid={testIds.player1Input}
+                    onChange={setP1Name}
+                /> )
         }
         {
-            isGameStarted && <h2 data-testid={testIds.player1Name} >
-                {p1Name}
-            </h2>
+            isGameStarted ? (
+                <h2 data-testid={testIds.player2Name} >
+                    {p2Name}
+                </h2> ) : (
+                <input
+                    data-testid={testIds.player2Input}
+                    onChange={setP2Name}
+                /> )
         }
-
-        {
-            !isGameStarted
-            && <input
-                data-testid={testIds.player2Input}
-                onChange={setP2Name} />
-        }
-        {
-            isGameStarted && <h2 data-testid={testIds.player2Name} >
-                {p2Name}
-            </h2>
-        }
-
         <button
             data-testid={testIds.startButton}
-            onClick={() => setGameStarted(true)} />
+            onClick={() => setGameStarted(true)}
+        >
+            Start game
+        </button>
     </>
 }
