@@ -10,7 +10,6 @@ export const checkWin = (arr) => {
     return false
 };
 
-
 export const fillArr = (arr, pos, value) => {
     switch (pos){
         case 1:
